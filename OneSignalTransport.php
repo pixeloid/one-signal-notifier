@@ -82,6 +82,9 @@ final class OneSignalTransport extends AbstractTransport
         $options = $opts ? $opts->toArray() : [];
         $options['app_id'] = $this->appId;
         $options['include_player_ids'] = [$recipientId];
+        if(!empty($options['include_external_user_ids'])) {
+            unset($options['include_player_ids']);
+        }
 
         if (!isset($options['headings'])) {
             $options['headings'] = ['en' => $message->getSubject()];
